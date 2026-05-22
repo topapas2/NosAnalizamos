@@ -110,6 +110,26 @@ covarianza
 *Los pares de variables con relaciones más altas son ALG con ANM con un 0,57 aproximadamente, seguido por FP y ALG con un 0,56 aproximadamente*
 
 
+## Representación de Boxplots
+
+```{r}
+notas %>%
+  pivot_longer(
+    cols = c(ANM, ALG, MD, FP, DCS),
+    names_to = "Asignatura",
+    values_to = "Nota"
+  ) %>%
+  ggplot(aes(x = Asignatura, y = Nota, fill = Asignatura)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(
+    title = "Distribución de calificaciones por asignatura",
+    x = "Asignatura",
+    y = "Calificación"
+  ) +
+  theme(legend.position = "")
+```
+
 
 
 
