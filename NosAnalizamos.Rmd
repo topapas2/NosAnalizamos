@@ -92,8 +92,22 @@ ggpairs(estadisticos %>% select(-Asignatura))
 ```
 
 
+## Matrices de Correlación y Convarianza
 
+```{r}
+vars <- notas %>% select(ANM, ALG, MD, FP, DCS)
 
+cor_pearson <- cor(vars, use = "pairwise.complete.obs", method = "pearson")
+
+cor_spearman <- cor(vars, use = "pairwise.complete.obs", method = "spearman")
+
+cor_pearson
+cor_spearman
+
+covarianza <- cov(vars, use = "pairwise.complete.obs")
+covarianza
+```
+*Los pares de variables con relaciones más altas son ALG con ANM con un 0,57 aproximadamente, seguido por FP y ALG con un 0,56 aproximadamente*
 
 
 
