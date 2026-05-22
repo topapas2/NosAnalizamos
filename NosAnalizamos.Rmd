@@ -127,7 +127,8 @@ notas %>%
     x = "Asignatura",
     y = "Calificación"
   ) +
-  theme(legend.position = "")
+  theme(legend.position = "none")
+
 ```
 
 
