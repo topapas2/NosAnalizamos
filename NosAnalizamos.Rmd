@@ -63,6 +63,28 @@ notas <- datos %>%
       )))
 ```
 
+## Tabla de Estadísticos
+
+```{r}
+estadisticos <- notas %>%
+  summarise(across(everything(),
+                   list(
+                     min = ~ min(., na.rm = TRUE),
+                    p25 = ~ quantile(., 0.25, na.rm = TRUE),
+                    mediana = ~ median(., na.rm = TRUE),
+                    media = ~ mean(., na.rm = TRUE),
+                    sd = ~ sd(., na.rm = TRUE),
+                    p75 = ~ quantile(., 0.75, na.rm = TRUE),
+                    max = ~ max(., na.rm = TRUE)))) %>%
+  pivot_longer(
+    everything(),
+    names_to = c("Asignatura", ".value"),
+    names_sep = "_") %>%
+  mutate(across(-Asignatura, ~ round(., 2)))
+
+```
+
+
 
 
 
