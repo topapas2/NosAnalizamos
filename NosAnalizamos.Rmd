@@ -81,8 +81,16 @@ estadisticos <- notas %>%
     names_to = c("Asignatura", ".value"),
     names_sep = "_") %>%
   mutate(across(-Asignatura, ~ round(., 2)))
+```
+
+
+## Representación de la Relación con 
+
+```{r}
+ggpairs(estadisticos %>% select(-Asignatura))
 
 ```
+
 
 
 
