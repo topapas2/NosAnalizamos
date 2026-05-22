@@ -84,7 +84,7 @@ estadisticos <- notas %>%
 ```
 
 
-## Representación de la Relación con 
+## Representación de la Relación con ggpairs
 
 ```{r}
 ggpairs(estadisticos %>% select(-Asignatura))
