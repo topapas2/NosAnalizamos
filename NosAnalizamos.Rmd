@@ -42,6 +42,23 @@ datos <- datos %>%
   select(!starts_with("..."))
 ```
 
+## Eliminar Usuario martsobm
+
+```{r}
+datos <- datos %>%
+  filter(Id != "martsobm")
+```
+
+## Modificar Columnas de Notas
+
+```{r}
+datos <- datos %>%
+  mutate(ANM = case_when(
+    ANM == "NC" ~ 3,
+    TRUE ~ as.numeric(ANM)
+  ))
+```
+
 
 
 
