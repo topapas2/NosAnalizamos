@@ -29,3 +29,22 @@ pacman::p_load(
   car,
   GGally)
 ```
+
+## Carga de los Datos
+
+```{r}
+# Empezamos por la linea 27 porque realmente los datos comienzan ahí
+datos <- read_tsv("data/NosAutoanalizamos2026.tsv",
+  skip = 27)
+
+# Sabemos que R si no encuentra nombre para las columnas pone algo asi como "...1", por lo que eliminamos dichas columnas
+datos <- datos %>%
+  select(!starts_with("..."))
+```
+
+
+
+
+
+
+
