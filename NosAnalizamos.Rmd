@@ -9,3 +9,23 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Carga de Librerias
+
+```{r}
+if (!require("pacman")) install.packages("pacman")
+
+# Instalar todas las librerías necesarias
+pacman::p_load(
+  knitr,
+  tidyverse,
+  ggplot2,
+  datasets,
+  RColorBrewer,
+  nycflights13,
+  dplyr,
+  dbplyr,
+  tidyr,
+  readr,
+  car,
+  GGally)
+```
