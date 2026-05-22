@@ -52,11 +52,15 @@ datos <- datos %>%
 ## Modificar Columnas de Notas
 
 ```{r}
-datos <- datos %>%
-  mutate(ANM = case_when(
-    ANM == "NC" ~ 3,
-    TRUE ~ as.numeric(ANM)
-  ))
+notas <- datos %>%
+  select("ALG", "ANM", "MD", "FP", "DCS") %>%
+  mutate(
+    across(
+      everything(),
+      ~ case_when(
+        . == "NC" ~ 3,
+        TRUE ~ as.numeric(gsub(",", ".", .))
+      )))
 ```
 
 
