@@ -1,0 +1,11 @@
+---
+title: "NosAnalizamos.Rmd"
+author: "Tomás"
+date: "2026-05-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
