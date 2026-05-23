@@ -207,6 +207,35 @@ edad_mas_joven
 
 ```
 
+# 2. Cuántos alumnos simultanean trabajo y estudios.
+
+```{r}
+con_trabajo <- datos %>%
+  filter(Hwork > 0)
+
+count(tra_est)
+
+```
+
+
+# 3. Hay más hombres o más mujeres fumadoras.
+
+```{r}
+datos <- datos %>%
+  mutate(Sex = case_when(
+        Sex %in% c("M", "F") ~ Sex,
+        TRUE ~ NA))
+
+fumadores <- datos %>%
+  filter(Smoke == "Si")
+
+fumadores  %>%
+  count(Sex)
+
+```
+
+
+
 
 
 
