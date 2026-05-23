@@ -136,13 +136,6 @@ notas %>%
 ```{r}
 notas_sexo <- datos %>%
   select("ALG", "ANM", "MD", "FP", "DCS", "Sex") %>%
-  mutate(
-    across(
-      c("ALG", "ANM", "MD", "FP", "DCS"),
-      ~ case_when(
-        . == "NC" ~ 3,
-        TRUE ~ as.numeric(gsub(",", ".", .))
-      ))) %>%
   pivot_longer(                                              
     cols = c(ANM, ALG, MD, FP, DCS),                         
     names_to = "Asignatura",                                 
