@@ -131,5 +131,59 @@ notas %>%
 ```
 
 
+## Añadir columna Sexo y representar por su color
+
+```{r}
+notas_sexo <- datos %>%
+  select("ALG", "ANM", "MD", "FP", "DCS", "Sex") %>%
+  mutate(
+    across(
+      c("ALG", "ANM", "MD", "FP", "DCS"),
+      ~ case_when(
+        . == "NC" ~ 3,
+        TRUE ~ as.numeric(gsub(",", ".", .))
+      ))) %>%
+  pivot_longer(                                              
+    cols = c(ANM, ALG, MD, FP, DCS),                         
+    names_to = "Asignatura",                                 
+    values_to = "Nota"  
+  )
+
+ggplot(notas_sexo, aes(x = Asignatura, y = Nota, fill = Sex)) +
+  geom_boxplot(position = position_dodge(width = 0.8)) +
+  theme_minimal() +
+  labs(
+    title = "Calificaciones por asignatura según sexo",
+    x = "Asignatura",
+    y = "Calificación",
+    fill = "Sexo"
+  ) +
+  theme(legend.position = "right")  
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
