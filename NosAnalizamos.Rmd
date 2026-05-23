@@ -204,6 +204,7 @@ alumno_mas_joven <- datos %>%
 
 edad_mas_joven <- alumno_mas_joven$Edad
 edad_mas_joven
+
 ```
 
 
