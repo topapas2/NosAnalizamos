@@ -157,7 +157,36 @@ ggplot(notas_sexo, aes(x = Asignatura, y = Nota, fill = Sex)) +
 ```
 
 
-##
+## Diferencia de notas entre los estudianes completos
+
+```{r}
+notas_completas <- datos %>%
+  filter(if_all(c("ALG", "ANM", "MD", "FP", "DCS"), ~ !is.na(.x))) %>%
+  select("Id", "ALG", "ANM", "MD", "FP", "DCS")  %>%                                                  
+  pivot_longer(                                             
+    cols = c(ANM, ALG, MD, FP, DCS),                     
+    names_to = "Asignatura",                               
+    values_to = "Notas"                                      
+  )
+
+notas_completas %>%
+  ggplot(aes(x = Id, 
+           y = Notas,
+           color = Asignatura,
+           group = Asignatura)) +
+  geom_line(size=1) +
+  geom_point(size=2) +
+  labs(                                                      
+    title = "Distribución de calificaciones por asignatura", 
+    x = "Id Alumno",                                        
+    y = "Calificación"
+  ) +                                  
+  theme(legend.position = "right") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+           
+
+```
+
 
 
 
