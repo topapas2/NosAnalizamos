@@ -52,15 +52,16 @@ datos <- datos %>%
 ## Modificar Columnas de Notas
 
 ```{r}
-notas <- datos %>%
-  select("ALG", "ANM", "MD", "FP", "DCS") %>%
+datos <- datos %>%
   mutate(
     across(
-      everything(),
+      c("ALG", "ANM", "MD", "FP", "DCS"),
       ~ case_when(
         . == "NC" ~ 3,
         TRUE ~ as.numeric(gsub(",", ".", .))
       )))
+notas <- datos %>%
+  select("ALG", "ANM", "MD", "FP", "DCS")
 ```
 
 ## Tabla de Estadísticos
