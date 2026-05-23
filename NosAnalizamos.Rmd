@@ -128,7 +128,6 @@ notas %>%
     y = "Calificación"
   ) +
   theme(legend.position = "none")
-
 ```
 
 
