@@ -152,6 +152,7 @@ ggplot(notas_sexo, aes(x = Asignatura, y = Nota, fill = Sex)) +
     fill = "Sexo"
   ) +
   theme(legend.position = "right")  
+
 ```
 
 
