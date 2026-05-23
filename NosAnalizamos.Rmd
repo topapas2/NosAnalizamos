@@ -186,6 +186,27 @@ notas_completas %>%
 ```
 
 
+## Preguntas del Apartado 13:
+
+# 1. ¿Qué edad, expresada en años (con decimales) tiene el alumno más joven a fecha 01/02/2026?
+
+```{r}
+fecha_ref <- dmy("01-02-2026")
+
+datos <- datos %>%
+  mutate(
+    `FechaNac(DD-MM-YYY)` = dmy(`FechaNac(DD-MM-YYY)`),
+    Edad = time_length(`FechaNac(DD-MM-YYY)` %--% fecha_ref, "years")
+  )
+
+alumno_mas_joven <- datos %>%
+  filter(Edad == min(Edad))
+
+edad_mas_joven <- alumno_mas_joven$Edad
+edad_mas_joven
+```
+
+
 
 
 
