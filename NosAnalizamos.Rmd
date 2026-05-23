@@ -157,6 +157,8 @@ ggplot(notas_sexo, aes(x = Asignatura, y = Nota, fill = Sex)) +
 ```
 
 
+##
+
 
 
 
