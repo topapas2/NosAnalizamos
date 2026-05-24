@@ -1,6 +1,6 @@
 ---
 title: "NosAnalizamos.Rmd"
-author: "Tomás"
+author: "Tomás Pallás"
 date: "2026-05-22"
 output: html_document
 ---
@@ -63,6 +63,9 @@ datos <- datos %>%
       )))
 notas <- datos %>%
   select("ALG", "ANM", "MD", "FP", "DCS")
+
+save(notas, file = "Notas.Rdata")
+
 ```
 
 ## Tabla de Estadísticos
@@ -357,7 +360,6 @@ alg_pulse
 ggplot(datos, aes(x = Pulse, y = ALG)) +
   geom_point() +
   theme_minimal()
-
 
 ```
 *Ante esta frase, tomando como referencia nuestro datos y tras haber estudiado esta posible relación, vemos que no existe gran diferencia entre las notas de aquellos que presentan un ritmo cardiaco superior a 65 y aquellos con un ritmo inferior, pero es cierto que esa mínima diferencia hace mayor la media de aquellos que cuentan con un ritmo cardiaco superior. De todas maneras, como cientifico de datos, podría decretar que no existen razones para dar como cierta esa afirmación, ya que la diferencia es mínima*
