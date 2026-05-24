@@ -209,13 +209,13 @@ edad_mas_joven
 *El alumno más joven tiene 18,12 años*
 
 
-# 2. ¿Cuántos alumnos simultanean trabajo y estudios?
+### 2. ¿Cuántos alumnos simultanean trabajo y estudios?
 
 ```{r}
 con_trabajo <- datos %>%
   filter(Hwork > 0)
 
-count(tra_est)
+count(con_trabajo)
 
 ```
 *En total 14 personas estudian y trabajan simultanuamente*
@@ -253,6 +253,31 @@ estadisticos_wrhnd <- datos %>%
 
 ```
 *El valor medio en los hombres es de 19,99 y el de las mujeres es de 18,04 y en el caso de la varianza, los hombres tienen un 1,73 de varianza mientras que las mujeres un 3,72*
+
+
+# 5. Determina si existe relación entre el sexo y la mano con la que se escribe  (NW.Hnd)
+
+```{r}
+mano_sexo <- datos %>%
+  select(Sex, NW.Hnd) %>%
+  mutate(NW.Hnd = case_when(
+              NW.Hnd %in% c("Izquierda", "Derecha") ~ NW.Hnd,
+              TRUE ~ NA),
+         NW.Hnd = as.factor(NW.Hnd),
+         Sex = as.factor(Sex))
+
+table(mano_sexo$Sex, mano_sexo$NW.Hnd)
+
+```
+*A la vista de los resultados, comprobamos que el sexo no guarda relación con la mano de escritura, ya que en ambos sexos predomina la escritura con la mano derecha sobre la mano izquierda con una diferencia notoria*
+
+
+# 6.Existe una relación lineal entre la altura (Height) y la distancia del extremo del meñique al extremo del pulgar de la mano con la que escribimos (Wr.Hnd)
+
+```{r}
+
+```
+
 
 
 
