@@ -206,8 +206,10 @@ edad_mas_joven <- alumno_mas_joven$Edad
 edad_mas_joven
 
 ```
+*El alumno más joven tiene 18,12 años*
 
-# 2. Cuántos alumnos simultanean trabajo y estudios.
+
+# 2. ¿Cuántos alumnos simultanean trabajo y estudios?
 
 ```{r}
 con_trabajo <- datos %>%
@@ -216,9 +218,10 @@ con_trabajo <- datos %>%
 count(tra_est)
 
 ```
+*En total 14 personas estudian y trabajan simultanuamente*
 
 
-# 3. Hay más hombres o más mujeres fumadoras.
+# 3. ¿Hay más hombres o más mujeres fumadoras?
 
 ```{r}
 datos <- datos %>%
@@ -232,6 +235,27 @@ fumadores <- datos %>%
 fumadores  %>%
   count(Sex)
 ```
+*Hay más mujeres que hombres, de hecho hay 7 mujeres y ningún hombre fumador*
+
+
+# 4. ¿Cuál es el valor medio y la varianza de la variable Wr.Hnd según el sexo?
+
+```{r}
+datos <- datos %>%
+  mutate(Wr.Hnd = as.numeric(gsub(",", ".", Wr.Hnd)))    
+  
+estadisticos_wrhnd <- datos %>%
+  filter(!is.na(Wr.Hnd), !is.na(Sex)) %>%
+  group_by(Sex) %>%
+  summarise(
+    media = mean(Wr.Hnd, na.rm = TRUE),
+    varianza = var(Wr.Hnd, na.rm = TRUE))
+
+```
+*El valor medio en los hombres es de 19,99 y el de las mujeres es de 18,04 y en el caso de la varianza, los hombres tienen un 1,73 de varianza mientras que las mujeres un 3,72*
+
+
+
 
 
 
