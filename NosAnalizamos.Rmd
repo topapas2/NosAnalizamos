@@ -231,7 +231,6 @@ fumadores <- datos %>%
 
 fumadores  %>%
   count(Sex)
-
 ```
 
 
