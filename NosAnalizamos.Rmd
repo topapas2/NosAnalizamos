@@ -343,37 +343,21 @@ fp_pulse
 *Para imputar las notas faltantes de FP según el valor de PulseCat, calculamos la media de las notas de FP separandolas según sean PulseH o PulseL, por lo que, según los datos obtenidos, para un alumno sin nota de FP y con PulseH, pondríamos una nota de 5,10 en cambio para si fuera de PulseL pondriamos un 4,13*
 
 
+### 10. ¿Qué podemos decir, como científicos de datos, ante esta frase referida a nuestros datos? "El ritmo cardíaco está ligado con la cantidad de sangre que llega al cerebro, por tanto existirá una relación lineal directa entre esta variable y las calificaciones obtenidas en ALG"
+
+```{r}
+alg_pulse <- datos %>%
+  mutate(PulseCat = as.factor(PulseCat)) %>%
+  group_by(PulseCat) %>%
+  summarise(
+    media = mean(ALG, na.rm = TRUE))
+
+alg_pulse
+
+ggplot(datos, aes(x = Pulse, y = ALG)) +
+  geom_point() +
+  theme_minimal()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
+*Ante esta frase, tomando como referencia nuestro datos y tras haber estudiado esta posible relación, vemos que no existe gran diferencia entre las notas de aquellos que presentan un ritmo cardiaco superior a 65 y aquellos con un ritmo inferior, pero es cierto que esa mínima diferencia hace mayor la media de aquellos que cuentan con un ritmo cardiaco superior. De todas maneras, como cientifico de datos, podría decretar que no existen razones para dar como cierta esa afirmación, ya que la diferencia es mínima*
