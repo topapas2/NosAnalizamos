@@ -252,6 +252,8 @@ estadisticos_wrhnd <- datos %>%
     media = mean(Wr.Hnd, na.rm = TRUE),
     varianza = var(Wr.Hnd, na.rm = TRUE))
 
+estadisticos_wrhnd
+
 ```
 *El valor medio en los hombres es de 19,99 y el de las mujeres es de 18,04 y en el caso de la varianza, los hombres tienen un 1,73 de varianza mientras que las mujeres un 3,72*
 
@@ -310,20 +312,35 @@ vector_altura[resultado$ind]
 
 ```{r}
 nota_fp <- datos %>%
-  select(FP) %>%
   summarise(
     media_fp = mean(FP, na.rm = TRUE)) %>%
   pull(media_fp)
 
-datos <- datos %>%
-  mutate(FP = case_when(
-    is.na(FP) ~ nota_fp,
-    TRUE ~ FP))
+nota_fp
 
 ```
 *Deberiamos utilizar el valor medio basicamente, que en este caso es el 4,4*
 
 
+### 9. Define una nueva variable (PulseCat) a partir del ritmo cardíaco (Pulse), con dos valores PulseH, si Pulse>=65 y PulseL si Pulse<65. ¿Qué valores utilizarías para imputar los valores faltantes de las notas de FP, dependiendo del valor de PulseCat (imputación por casos similares)?
+
+```{r}
+datos <- datos %>%
+  mutate(PulseCat = case_when(
+    Pulse >= 65 ~ "PulseH",
+    Pulse < 65 ~ "PulseL"
+  ))
+
+fp_pulse <- datos %>%
+  mutate(PulseCat = as.factor(PulseCat)) %>%
+  group_by(PulseCat) %>%
+  summarise(
+    media = mean(FP, na.rm = TRUE))
+
+fp_pulse
+
+```
+*Para imputar las notas faltantes de FP según el valor de PulseCat, calculamos la media de las notas de FP separandolas según sean PulseH o PulseL, por lo que, según los datos obtenidos, para un alumno sin nota de FP y con PulseH, pondríamos una nota de 5,10 en cambio para si fuera de PulseL pondriamos un 4,13*
 
 
 
