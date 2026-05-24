@@ -27,7 +27,8 @@ pacman::p_load(
   tidyr,
   readr,
   car,
-  GGally)
+  GGally,
+  pracma)
 ```
 
 ## Carga de los Datos
@@ -188,7 +189,7 @@ notas_completas %>%
 
 ## Preguntas del Apartado 13:
 
-# 1. ¿Qué edad, expresada en años (con decimales) tiene el alumno más joven a fecha 01/02/2026?
+### 1. ¿Qué edad, expresada en años (con decimales) tiene el alumno más joven a fecha 01/02/2026?
 
 ```{r}
 fecha_ref <- dmy("01-02-2026")
@@ -221,7 +222,7 @@ count(con_trabajo)
 *En total 14 personas estudian y trabajan simultanuamente*
 
 
-# 3. ¿Hay más hombres o más mujeres fumadoras?
+### 3. ¿Hay más hombres o más mujeres fumadoras?
 
 ```{r}
 datos <- datos %>%
@@ -238,7 +239,7 @@ fumadores  %>%
 *Hay más mujeres que hombres, de hecho hay 7 mujeres y ningún hombre fumador*
 
 
-# 4. ¿Cuál es el valor medio y la varianza de la variable Wr.Hnd según el sexo?
+### 4. ¿Cuál es el valor medio y la varianza de la variable Wr.Hnd según el sexo?
 
 ```{r}
 datos <- datos %>%
@@ -255,7 +256,7 @@ estadisticos_wrhnd <- datos %>%
 *El valor medio en los hombres es de 19,99 y el de las mujeres es de 18,04 y en el caso de la varianza, los hombres tienen un 1,73 de varianza mientras que las mujeres un 3,72*
 
 
-# 5. Determina si existe relación entre el sexo y la mano con la que se escribe  (NW.Hnd)
+### 5. Determina si existe relación entre el sexo y la mano con la que se escribe  (NW.Hnd)
 
 ```{r}
 mano_sexo <- datos %>%
@@ -272,11 +273,24 @@ table(mano_sexo$Sex, mano_sexo$NW.Hnd)
 *A la vista de los resultados, comprobamos que el sexo no guarda relación con la mano de escritura, ya que en ambos sexos predomina la escritura con la mano derecha sobre la mano izquierda con una diferencia notoria*
 
 
-# 6.Existe una relación lineal entre la altura (Height) y la distancia del extremo del meñique al extremo del pulgar de la mano con la que escribimos (Wr.Hnd)
+### 6. ¿Existe una relación lineal entre la altura (Height) y la distancia del extremo del meñique al extremo del pulgar de la mano con la que escribimos (Wr.Hnd)?
 
 ```{r}
+mano_altura <- datos %>%
+  select(Wr.Hnd, Height) %>%
+  filter(!is.na(Wr.Hnd), !is.na(Height)) %>%
+  mutate(
+    Wr.Hnd = as.numeric(gsub(",", ".", Wr.Hnd)),
+    Height = as.numeric(gsub(",", ".", Height)))
+
+cor_mano_altura <- cor(mano_altura$Wr.Hnd, mano_altura$Height, method = "pearson") 
+cor_mano_altura
 
 ```
+*Según la correlación obtenida, podemos afirmar que la altura y el tamaño de la mano se relacionan de forma positiva, es decir, si una aumenta, la otra también y con una correlación, sin llegar a ser fuerte, pero si es considerable*
+
+
+
 
 
 
