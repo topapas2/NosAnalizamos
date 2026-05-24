@@ -301,8 +301,31 @@ vector_altura <- altura$Height
 resultado <- hampel(vector_altura, k=4, t0=3)
 
 vector_altura[resultado$ind]
+
 ```
 *No, el identificador Hampel no nos muestra ningún outlier en la variable altura*
+
+
+### 8. Considera la asignatura FP. Si queremos realizar una imputación generalizada usando la media, ¿qué valor deberíamos utilizar?
+
+```{r}
+nota_fp <- datos %>%
+  select(FP) %>%
+  summarise(
+    media_fp = mean(FP, na.rm = TRUE)) %>%
+  pull(media_fp)
+
+datos <- datos %>%
+  mutate(FP = case_when(
+    is.na(FP) ~ nota_fp,
+    TRUE ~ FP))
+
+```
+*Deberiamos utilizar el valor medio basicamente, que en este caso es el 4,4*
+
+
+
+
 
 
 
