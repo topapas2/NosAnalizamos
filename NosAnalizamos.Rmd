@@ -290,6 +290,20 @@ cor_mano_altura
 *Según la correlación obtenida, podemos afirmar que la altura y el tamaño de la mano se relacionan de forma positiva, es decir, si una aumenta, la otra también y con una correlación, sin llegar a ser fuerte, pero si es considerable*
 
 
+### 7. ¿El identificador de Hampel detecta algún outlier en la variable altura?
+
+```{r}
+altura <- mano_altura %>%
+  select(Height)
+
+vector_altura <- altura$Height
+
+resultado <- hampel(vector_altura, k=4, t0=3)
+
+vector_altura[resultado$ind]
+```
+*No, el identificador Hampel no nos muestra ningún outlier en la variable altura*
+
 
 
 
